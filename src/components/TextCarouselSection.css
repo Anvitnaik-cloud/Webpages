@@ -1,0 +1,73 @@
+/* ── Text Carousel Section ── */
+.carousel-section {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+
+.carousel-section-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  padding: var(--space-xl) 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Label chip */
+.carousel-section-label {
+  font-family: var(--font-headline);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 5px 16px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Heading */
+.carousel-section-heading {
+  font-family: var(--font-headline);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--text-primary);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Animated word highlight */
+.carousel-word {
+  color: #ffffff;
+}
+
+/* Subtitle */
+.carousel-section-sub {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 520px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .carousel-section-inner {
+    padding: var(--space-lg) 0;
+  }
+
+  .carousel-section-heading {
+    font-size: 1.75rem;
+  }
+
+  .carousel-section-sub {
+    font-size: 0.95rem;
+    max-width: 90%;
+  }
+}
