@@ -5,11 +5,16 @@ import Hero from './components/Hero';
 import NewArrivals from './components/NewArrivals';
 import FeaturedCollection from './components/FeaturedCollection';
 import ScienceSection from './components/ScienceSection';
+import StackingCardsSection from './components/StackingCardsSection';
 import TextCarouselSection from './components/TextCarouselSection';
 import StorySection from './components/StorySection';
 import JoinSquad from './components/JoinSquad';
 import Footer from './components/Footer';
 import Lenis from '@studio-freight/lenis';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
   useEffect(() => {
@@ -23,14 +28,17 @@ export default function App() {
       touchMultiplier: 1.5,
     });
 
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+    lenis.on('scroll', ScrollTrigger.update);
 
-    requestAnimationFrame(raf);
+    const updateTicker = (time) => {
+      lenis.raf(time * 1000);
+    };
+
+    gsap.ticker.add(updateTicker);
+    gsap.ticker.lagSmoothing(0);
 
     return () => {
+      gsap.ticker.remove(updateTicker);
       lenis.destroy();
     };
   }, []);
@@ -44,6 +52,7 @@ export default function App() {
         <NewArrivals />
         <FeaturedCollection />
         <ScienceSection />
+        <StackingCardsSection />
         <TextCarouselSection />
         <StorySection />
         <JoinSquad />
