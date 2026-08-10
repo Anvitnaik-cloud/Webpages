@@ -116,22 +116,44 @@
 }
 
 /* Responsive Breakpoints */
+@media (max-width: 1024px) {
+  .stacking-headline {
+    font-size: clamp(3.5rem, 12vw, 9rem);
+  }
+}
+
 @media (max-width: 768px) {
   .stacking-headline {
-    font-size: clamp(2.8rem, 14vw, 5.5rem);
+    font-size: clamp(2.2rem, 11vw, 5.5rem);
     white-space: normal;
     line-height: 0.95;
   }
 
   .stacking-card {
-    width: 82vw;
-    height: 220px;
+    width: min(360px, 82vw);
+    height: min(240px, 40vh);
     border-radius: 0 !important;
     padding: 22px 24px;
   }
 
   .card-title {
     font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .stacking-headline {
+    font-size: clamp(1.8rem, 10vw, 3.2rem);
+  }
+
+  .stacking-card {
+    width: min(300px, 84vw);
+    height: 180px;
+    padding: 16px 18px;
+  }
+
+  .card-title {
+    font-size: 0.88rem;
   }
 }
 

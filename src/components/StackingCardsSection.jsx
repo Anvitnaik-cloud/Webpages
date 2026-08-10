@@ -12,7 +12,7 @@ const cardsData = [
     color: '#0544EB', // Electric Blue
     textColor: '#ffffff',
     desktopX: '-28vw',
-    mobileX: '-18vw',
+    mobileX: '-8vw',
     height: 'min(500px, 80vh)', // Additional 30% height increase for first card
     rotate: 0,
     svgPattern: (
@@ -32,7 +32,7 @@ const cardsData = [
     color: '#E60028', // Vivid Crimson Red
     textColor: '#ffffff',
     desktopX: '14vw',
-    mobileX: '10vw',
+    mobileX: '6vw',
     rotate: 0,
     svgPattern: (
       <svg viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg" className="card-svg-overlay">
@@ -49,7 +49,7 @@ const cardsData = [
     color: '#5B068A', // Deep Royal Purple
     textColor: '#ffffff',
     desktopX: '-28vw',
-    mobileX: '-18vw',
+    mobileX: '-8vw',
     rotate: 0,
     svgPattern: (
       <svg viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg" className="card-svg-overlay">
@@ -67,7 +67,7 @@ const cardsData = [
     color: '#00875A', // Emerald Green
     textColor: '#ffffff',
     desktopX: '14vw',
-    mobileX: '10vw',
+    mobileX: '6vw',
     rotate: 0,
     svgPattern: (
       <svg viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg" className="card-svg-overlay">

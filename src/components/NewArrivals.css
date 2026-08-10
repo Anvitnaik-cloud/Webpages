@@ -40,8 +40,8 @@
 
 /* ─── Gallery Strip ─── */
 .new-arrivals-gallery {
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
+  width: 100%;
+  max-width: 100%;
 }
 
 .gallery-strip {

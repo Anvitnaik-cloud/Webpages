@@ -33,11 +33,10 @@
 /* Heading */
 .carousel-section-heading {
   font-family: var(--font-headline);
-  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-size: clamp(2rem, 5vw, 4rem);
   font-weight: 800;
   line-height: 1.15;
   color: var(--text-primary);
-  white-space: nowrap;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
@@ -57,17 +56,25 @@
 }
 
 /* ── Responsive ── */
+@media (max-width: 768px) {
+  .carousel-section-heading {
+    white-space: normal;
+    font-size: clamp(1.6rem, 5vw, 2.5rem);
+  }
+}
+
 @media (max-width: 640px) {
   .carousel-section-inner {
     padding: var(--space-lg) 0;
   }
 
   .carousel-section-heading {
-    font-size: 1.75rem;
+    font-size: clamp(1.35rem, 6vw, 2rem);
   }
 
   .carousel-section-sub {
     font-size: 0.95rem;
-    max-width: 90%;
+    max-width: 100%;
   }
 }
+

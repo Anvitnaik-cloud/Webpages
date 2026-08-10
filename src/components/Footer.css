@@ -100,10 +100,22 @@
 @media (max-width: 768px) {
     .footer-inner {
         flex-direction: column;
+        align-items: center;
         text-align: center;
+        gap: var(--space-lg);
     }
 
     .footer-links {
         justify-content: center;
+        gap: var(--space-sm) var(--space-md);
     }
 }
+
+@media (max-width: 480px) {
+    .footer-links {
+        gap: 10px 14px;
+    }
+    .footer-links a {
+        font-size: 11px;
+    }
+}

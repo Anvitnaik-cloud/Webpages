@@ -31,6 +31,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
+    white-space: nowrap;
 }
 
 .navbar-logo .logo-accent {
@@ -40,7 +41,7 @@
 .navbar-links {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: clamp(16px, 2.2vw, 32px);
 }
 
 .navbar-links a {
@@ -52,6 +53,7 @@
     color: var(--text-secondary);
     transition: color 0.25s ease;
     position: relative;
+    white-space: nowrap;
 }
 
 .navbar-links a::after {
@@ -85,6 +87,7 @@
     display: flex;
     align-items: center;
     gap: 20px;
+    flex-shrink: 0;
 }
 
 .navbar-icon {
@@ -100,8 +103,36 @@
     transform: scale(1.1);
 }
 
+@media (max-width: 1024px) {
+    .navbar-links {
+        gap: 16px;
+    }
+    .navbar-links a {
+        font-size: 12px;
+    }
+}
+
 @media (max-width: 768px) {
     .navbar-links {
         display: none;
+    }
+    .navbar-icons {
+        gap: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar-inner {
+        height: 56px;
+    }
+    .navbar-logo {
+        font-size: 15px;
+    }
+    .navbar-icons {
+        gap: 14px;
+    }
+    .navbar-icon {
+        width: 18px;
+        height: 18px;
     }
 }

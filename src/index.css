@@ -173,6 +173,22 @@ ul {
   padding: var(--space-xxl) 0;
 }
 
+@media (max-width: 768px) {
+  :root {
+    --space-xxl: 56px;
+    --space-xl: 36px;
+    --gutter: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --space-xxl: 40px;
+    --space-xl: 28px;
+    --gutter: 16px;
+  }
+}
+
 /* Lenis smooth scrolling rules */
 html.lenis, html.lenis body {
   height: auto;
@@ -193,3 +209,4 @@ html.lenis, html.lenis body {
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
 }
+
