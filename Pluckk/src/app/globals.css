@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-outfit);
+
+  /* Flavor palette */
+  --color-mango: #f59e0b;
+  --color-mango-light: #fbbf24;
+  --color-mango-dark: #d97706;
+  --color-chocolate: #92400e;
+  --color-chocolate-light: #b45309;
+  --color-chocolate-dark: #78350f;
+  --color-pomegranate: #be123c;
+  --color-pomegranate-light: #e11d48;
+  --color-pomegranate-dark: #9f1239;
+}
+
+:root {
+  --background: #fafafa;
+  --foreground: #18181b;
+  --product-gradient-from: #fffcf3;
+  --product-gradient-to: #fafafa;
+  --product-accent: #f59e0b;
+}
+
+/* Selection */
+::selection {
+  background-color: #f59e0b;
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background-color: #f59e0b;
+  color: #ffffff;
+}
+
+/* Scrollbar: hidden for app-like feel */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+html {
+  scrollbar-width: none;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-outfit), sans-serif;
+  overflow-x: hidden;
+  transition: background 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Smooth gradient background tied to flavor */
+.product-bg {
+  background: linear-gradient(
+    180deg,
+    var(--product-gradient-from) 0%,
+    var(--product-gradient-to) 60%,
+    var(--background) 100%
+  );
+}
+
+/* Glow button effect */
+.glow-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.glow-button::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from 0deg,
+    var(--product-accent),
+    transparent 60%,
+    var(--product-accent)
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+  animation: glow-spin 3s linear infinite paused;
+}
+
+.glow-button:hover::before {
+  opacity: 1;
+  animation-play-state: running;
+}
+
+@keyframes glow-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Canvas container & sharp image rendering */
+.canvas-container {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+canvas {
+  image-rendering: high-quality;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+img {
+  image-rendering: high-quality;
+}
+
+/* Text overlay positioning */
+.text-overlay {
+  position: absolute;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.text-overlay > * {
+  pointer-events: auto;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
