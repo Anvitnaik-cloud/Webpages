@@ -149,14 +149,15 @@ export default function Smooth3DSlideshow(props: Smooth3DSlideshowProps) {
   const isTablet = windowWidth >= 640 && windowWidth < 1024;
 
   const responsiveWidth = isSmallMobile
-    ? Math.min(190, windowWidth - 60)
+    ? Math.min(155, Math.floor(windowWidth * 0.45))
     : isMobile
-    ? Math.min(220, windowWidth - 80)
+    ? Math.min(185, Math.floor(windowWidth * 0.48))
     : isTablet
-    ? 310
+    ? 300
     : cardWidth;
-  const responsiveHeight = isSmallMobile ? 260 : isMobile ? 290 : isTablet ? 420 : cardHeight;
-  const responsiveGap = isSmallMobile ? 52 : isMobile ? 65 : isTablet ? gap * 20 : gap * 30;
+
+  const responsiveHeight = isSmallMobile ? 210 : isMobile ? 245 : isTablet ? 400 : cardHeight;
+  const responsiveGap = isSmallMobile ? 38 : isMobile ? 48 : isTablet ? 130 : gap * 30;
 
   // Touch swipe handling for mobile devices
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
@@ -168,7 +169,7 @@ export default function Smooth3DSlideshow(props: Smooth3DSlideshowProps) {
   const handleTouchEnd = (e: React.TouchEvent) => {
     if (touchStartX === null) return;
     const diff = e.changedTouches[0].clientX - touchStartX;
-    if (Math.abs(diff) > 40) {
+    if (Math.abs(diff) > 25) {
       if (diff > 0) {
         step(-1);
       } else {
@@ -260,8 +261,8 @@ export default function Smooth3DSlideshow(props: Smooth3DSlideshowProps) {
     position: "relative",
     width: "100%",
     height: "100%",
-    minWidth: 220,
-    minHeight: isMobile ? 320 : 540,
+    minWidth: 200,
+    minHeight: isMobile ? 275 : 540,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -298,11 +299,11 @@ export default function Smooth3DSlideshow(props: Smooth3DSlideshowProps) {
           const ax = Math.abs(rel);
           const visible = ax <= MAX_VISIBLE;
           const isActive = rel === 0;
-          const sc = Math.max(0.45, 1 - ax * (isMobile ? 0.18 : SCALE_STEP));
+          const sc = Math.max(0.5, 1 - ax * (isMobile ? 0.16 : SCALE_STEP));
           const tx = rel * responsiveGap;
-          const tz = -ax * (isMobile ? 180 : DEPTH);
-          const ry = -rel * tilt;
-          const rz = rel * sideTilt;
+          const tz = -ax * (isMobile ? 120 : DEPTH);
+          const ry = -rel * (isMobile ? 9 : tilt);
+          const rz = rel * (isMobile ? 6 : sideTilt);
           const src = slide.image?.src || "";
 
           const cardStyle: CSSProperties = {
@@ -319,11 +320,11 @@ export default function Smooth3DSlideshow(props: Smooth3DSlideshowProps) {
             transition: transitionCss,
             opacity: visible ? 1 : 0,
             cursor: autoplay || isActive ? "default" : "pointer",
-            pointerEvents: visible && !isStatic && !autoplay ? "auto" : "none",
+            pointerEvents: visible && !isStatic ? "auto" : "none",
             backgroundColor: "#ffffff",
             boxShadow: isActive
-              ? "0 20px 40px -15px rgba(0,0,0,0.5)"
-              : "0 10px 25px -10px rgba(0,0,0,0.2)",
+              ? "0 20px 35px -12px rgba(0,0,0,0.4)"
+              : "0 8px 20px -8px rgba(0,0,0,0.2)",
           };
 
           return (
@@ -380,7 +381,7 @@ export default function Smooth3DSlideshow(props: Smooth3DSlideshowProps) {
                     <span
                       style={{
                         color: titleColor,
-                        fontSize: 28,
+                        fontSize: isMobile ? 18 : 28,
                         fontWeight: 700,
                         lineHeight: "1.1em",
                         letterSpacing: "-0.02em",
@@ -408,6 +409,26 @@ export default function Smooth3DSlideshow(props: Smooth3DSlideshowProps) {
             </div>
           );
         })}
+      </div>
+
+      {/* Interactive Mobile Navigation Dots */}
+      <div className="flex items-center justify-center gap-1.5 mt-5 z-20">
+        {list.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => handleCardClick(i)}
+            className="min-h-[32px] px-1 flex items-center justify-center cursor-pointer"
+            aria-label={`Go to slide ${i + 1}`}
+          >
+            <span
+              className="h-2 rounded-full transition-all duration-300"
+              style={{
+                width: active === i ? "20px" : "8px",
+                backgroundColor: active === i ? "#18181b" : "#d4d4d8",
+              }}
+            />
+          </button>
+        ))}
       </div>
     </div>
   );
