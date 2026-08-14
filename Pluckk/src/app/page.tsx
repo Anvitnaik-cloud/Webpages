@@ -123,22 +123,22 @@ function PageContent() {
           <FreshnessSection />
 
           {/* 3D Coverflow Showcase */}
-          <section className="relative py-8 sm:py-20 px-3 sm:px-6 overflow-hidden">
-            <div className="max-w-7xl mx-auto text-center mb-3">
+          <section className="relative py-6 sm:py-20 px-3 sm:px-6 overflow-hidden">
+            <div className="max-w-7xl mx-auto text-center mb-4 sm:mb-6">
               <p
-                className="text-[11px] sm:text-sm font-semibold uppercase tracking-wider mb-1.5 sm:mb-3"
+                className="text-[11px] sm:text-sm font-semibold uppercase tracking-wider mb-1 sm:mb-3"
                 style={{ color: product.themeColor }}
               >
                 3D Showcase
               </p>
-              <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900 mb-2 sm:mb-4">
+              <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900 mb-1.5 sm:mb-4">
                 Explore the Collection.
               </h2>
-              <p className="text-xs sm:text-base md:text-lg text-zinc-600 max-w-[45ch] mx-auto">
-                Click any bottle card to bring it to center stage.
+              <p className="text-xs sm:text-base md:text-lg text-zinc-600 max-w-[45ch] mx-auto mb-0">
+                Swipe or click any bottle card to bring it to center stage.
               </p>
             </div>
-            <div className="min-h-[300px] sm:min-h-[550px] w-full flex items-center justify-center">
+            <div className="min-h-[280px] sm:min-h-[550px] w-full flex items-center justify-center">
               <CoverflowGallery />
             </div>
           </section>
