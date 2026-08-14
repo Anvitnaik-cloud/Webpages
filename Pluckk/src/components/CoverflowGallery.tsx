@@ -133,52 +133,53 @@ export default function Smooth3DSlideshow(props: Smooth3DSlideshowProps) {
   const padTop = tp.paddingTop ?? 24;
   const padBottom = tp.paddingBottom ?? 24;
 
-  // Responsive dimension calculations for mobile devices
-  const [windowWidth, setWindowWidth] = useState<number>(
-    typeof window !== "undefined" ? window.innerWidth : 1024
-  );
+  // SSR-safe window width tracking with zero hydration mismatch
+  const [windowWidth, setWindowWidth] = useState<number>(1024);
+  const [mounted, setMounted] = useState<boolean>(false);
 
   useEffect(() => {
+    setMounted(true);
+    setWindowWidth(window.innerWidth);
     const handleResize = () => setWindowWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const isSmallMobile = windowWidth < 380;
-  const isMobile = windowWidth < 640;
-  const isTablet = windowWidth >= 640 && windowWidth < 1024;
+  const isSmallMobile = mounted && windowWidth < 380;
+  const isMobile = mounted && windowWidth < 640;
+  const isTablet = mounted && windowWidth >= 640 && windowWidth < 1024;
 
-  // Mobile: active card ≈ 58vw (clamped 170–240px), side cards scale down via SCALE_STEP
+  // Mobile: active card ≈ 54–56vw (clamped 180–220px), perfectly proportioned
   // Desktop: original cardWidth/cardHeight values untouched
   const responsiveWidth = isSmallMobile
-    ? Math.min(Math.max(170, Math.round(windowWidth * 0.55)), 200)
+    ? 180
     : isMobile
-    ? Math.min(Math.max(180, Math.round(windowWidth * 0.58)), 240)
+    ? Math.min(Math.max(190, Math.round(windowWidth * 0.54)), 220)
     : isTablet
     ? 310
     : cardWidth;
 
-  // Mobile: aspect ratio ~4:5.2 preserved, height clamped for compact layout
+  // Mobile: aspect ratio ~1:1.33 preserved
   const responsiveHeight = isSmallMobile
-    ? Math.round(responsiveWidth * 1.28)
+    ? 240
     : isMobile
-    ? Math.round(responsiveWidth * 1.3)
+    ? Math.round(responsiveWidth * 1.32)
     : isTablet
     ? 420
     : cardHeight;
 
-  // Mobile: tighter gap so side cards stay visible but don't clip edges
+  // Mobile: tight gap so side cards stay visible on screen without clipping edges
   const responsiveGap = isSmallMobile
-    ? Math.round(windowWidth * 0.15)
+    ? 48
     : isMobile
-    ? Math.round(windowWidth * 0.16)
+    ? Math.round(responsiveWidth * 0.28)
     : isTablet
     ? gap * 20
     : gap * 30;
 
-  // Mobile: shallower depth for compact feel, stronger scale step for side cards
-  const responsiveDepth = isMobile ? 120 : DEPTH;
-  const responsiveScaleStep = isMobile ? 0.22 : SCALE_STEP;
+  // Mobile: depth and scaling for smooth 3D perspective
+  const responsiveDepth = isMobile ? 110 : DEPTH;
+  const responsiveScaleStep = isMobile ? 0.20 : SCALE_STEP;
 
   // Touch swipe handling for mobile devices
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
@@ -269,34 +270,47 @@ export default function Smooth3DSlideshow(props: Smooth3DSlideshowProps) {
     [step]
   );
 
-  // Mobile: slightly faster transition for snappier feel
   const { dur, ease } = cssTransition(transition);
   const effectiveDur = isMobile ? Math.min(dur, 0.45) : dur;
   const transitionCss = `transform ${effectiveDur}s ${ease}, opacity ${effectiveDur}s ${ease}`;
 
+  // Stadium/pill curved border radius (matching desktop design proportionally)
   const effectiveRadius =
     (Math.max(0, Math.min(20, radius)) / 20) *
     (Math.min(responsiveWidth, responsiveHeight) / 2);
+
   const dim = 1 - Math.max(0, Math.min(100, opacity)) / 100;
 
-  // Mobile: compact container height clamped 280-360px
   const rootStyle: CSSProperties = {
     ...(style || {}),
     position: "relative",
     width: "100%",
     height: "100%",
     minWidth: 220,
-    minHeight: isMobile
-      ? Math.min(Math.max(280, Math.round(windowWidth * 0.82)), 360)
-      : 540,
+    minHeight: isMobile ? 290 : 540,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    perspective: `${isMobile ? 1200 : PERSPECTIVE}px`,
+    perspective: `${isMobile ? 1100 : PERSPECTIVE}px`,
     overflow: "hidden",
     outline: "none",
   };
+
+  if (!mounted) {
+    return (
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          minHeight: 300,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      />
+    );
+  }
 
   return (
     <div
@@ -329,7 +343,7 @@ export default function Smooth3DSlideshow(props: Smooth3DSlideshowProps) {
           const tx = rel * responsiveGap;
           const tz = -ax * responsiveDepth;
           const ry = -rel * (isMobile ? Math.min(tilt, 10) : tilt);
-          const rz = rel * (isMobile ? Math.min(sideTilt, 5) : sideTilt);
+          const rz = rel * (isMobile ? Math.min(sideTilt, 4) : sideTilt);
           const src = slide.image?.src || "";
 
           const cardStyle: CSSProperties = {
@@ -350,12 +364,18 @@ export default function Smooth3DSlideshow(props: Smooth3DSlideshowProps) {
             backgroundColor: "#ffffff",
             boxShadow: isMobile
               ? isActive
-                ? "0 12px 28px -8px rgba(0,0,0,0.35)"
-                : "0 6px 16px -6px rgba(0,0,0,0.15)"
+                ? "0 10px 24px -6px rgba(0,0,0,0.3)"
+                : "0 4px 12px -4px rgba(0,0,0,0.12)"
               : isActive
               ? "0 20px 40px -15px rgba(0,0,0,0.5)"
               : "0 10px 25px -10px rgba(0,0,0,0.2)",
           };
+
+          const imgZoom = isMobile
+            ? 1 // Standard scale on mobile so bottle cap/text isn't cropped
+            : slide.zoom
+            ? slide.zoom
+            : 1;
 
           return (
             <div
@@ -377,7 +397,7 @@ export default function Smooth3DSlideshow(props: Smooth3DSlideshowProps) {
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
-                    transform: slide.zoom ? `scale(${slide.zoom})` : "none",
+                    transform: imgZoom !== 1 ? `scale(${imgZoom})` : "none",
                     transformOrigin: "center center",
                     display: "block",
                     userSelect: "none",
