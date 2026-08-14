@@ -46,12 +46,18 @@ html {
   scrollbar-width: none;
 }
 
+html, body {
+  max-width: 100vw;
+  overflow-x: clip;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-outfit), sans-serif;
-  overflow-x: hidden;
   transition: background 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-tap-highlight-color: transparent;
+  text-rendering: optimizeLegibility;
 }
 
 /* Smooth gradient background tied to flavor */

@@ -34,22 +34,22 @@ export default function FlavorNav() {
       </div>
 
       {/* Bottom pill menu */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40">
-        <div className="flex items-center gap-3 px-5 py-3 rounded-full bg-white/90 backdrop-blur-xl border border-zinc-200 shadow-xl shadow-zinc-950/5">
+      <div className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-40 max-w-[calc(100vw-24px)] pointer-events-none">
+        <div className="flex items-center gap-2 sm:gap-3 px-3.5 sm:px-5 py-2 sm:py-3 rounded-full bg-white/90 backdrop-blur-xl border border-zinc-200/90 shadow-xl shadow-zinc-950/10 pointer-events-auto">
           {products.map((p, i) => (
             <button
               key={p.id}
               onClick={() => setCurrentIndex(i)}
-              className="relative flex items-center gap-2 group"
+              className="relative min-h-[44px] px-1 sm:px-1.5 flex items-center gap-1.5 sm:gap-2 group shrink-0 cursor-pointer"
               aria-label={`Switch to ${p.name}`}
             >
               <div
-                className="w-3 h-3 rounded-full transition-all duration-300"
+                className="w-3 h-3 rounded-full transition-all duration-300 shrink-0"
                 style={{
                   background: p.themeColor,
                   opacity: currentIndex === i ? 1 : 0.35,
                   transform:
-                    currentIndex === i ? "scale(1.3)" : "scale(1)",
+                    currentIndex === i ? "scale(1.25)" : "scale(1)",
                 }}
               />
               <AnimatePresence>
@@ -59,7 +59,7 @@ export default function FlavorNav() {
                     animate={{ opacity: 1, width: "auto" }}
                     exit={{ opacity: 0, width: 0 }}
                     transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                    className="text-xs font-bold text-zinc-900 overflow-hidden whitespace-nowrap"
+                    className="text-[11px] sm:text-xs font-bold text-zinc-900 overflow-hidden whitespace-nowrap"
                   >
                     {p.name}
                   </motion.span>

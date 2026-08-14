@@ -81,7 +81,7 @@ export default function FreshnessSection() {
           TITLE — Normal flow, always visible, never disappears.
           Sits above the image in the page layout.
           ═══════════════════════════════════════════════════ */}
-      <div className="px-4 lg:px-6 pt-12 pb-4 lg:pt-16 lg:pb-6">
+      <div className="px-4 lg:px-6 pt-8 pb-4 lg:pt-16 lg:pb-6">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={reduce ? false : { opacity: 0, y: 24 }}
@@ -91,30 +91,30 @@ export default function FreshnessSection() {
             className="flex flex-col tracking-tighter uppercase font-sans select-none"
           >
             {/* Row 1: badge + FARM */}
-            <div className="flex items-baseline gap-3 sm:gap-5 flex-wrap">
+            <div className="flex items-center sm:items-baseline gap-2.5 sm:gap-5 flex-wrap">
               <span
                 className="text-[10px] sm:text-xs font-black tracking-widest uppercase py-1 px-3 rounded-full text-amber-950"
                 style={{ backgroundColor: "#FDD9A0" }}
               >
                 Since 2024
               </span>
-              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[0.88] text-zinc-950 tracking-tighter">
+              <h1 className="text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-none text-zinc-950 tracking-tighter">
                 FARM
               </h1>
             </div>
 
             {/* Row 2 */}
-            <div className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-[0.88] text-zinc-950 tracking-tighter mt-1">
+            <div className="text-xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight sm:leading-[0.88] text-zinc-950 tracking-tighter mt-1">
               TO BOTTLE IN 4 HOURS.
             </div>
 
             {/* Row 3 + description */}
-            <div className="mt-1.5 flex flex-col md:flex-row md:items-end justify-between gap-3">
-              <div className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-black leading-[0.88] text-zinc-950 tracking-tighter">
+            <div className="mt-1 flex flex-col md:flex-row md:items-end justify-between gap-3">
+              <div className="text-lg sm:text-3xl md:text-4xl lg:text-5xl font-black leading-tight sm:leading-[0.88] text-zinc-950 tracking-tighter">
                 PURE &amp; UNPROCESSED.
               </div>
               <div
-                className="max-w-[260px] text-[11px] sm:text-xs font-semibold normal-case leading-snug text-zinc-700 tracking-normal border-l-4 pl-3 py-1 shrink-0"
+                className="max-w-[280px] sm:max-w-[260px] text-[11px] sm:text-xs font-semibold normal-case leading-snug text-zinc-700 tracking-normal border-l-4 pl-3 py-0.5 shrink-0"
                 style={{ borderColor: "#F5A961" }}
               >
                 {product.freshnessBody}

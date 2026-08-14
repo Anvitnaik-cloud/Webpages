@@ -144,16 +144,19 @@ export default function Smooth3DSlideshow(props: Smooth3DSlideshowProps) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const isSmallMobile = windowWidth < 380;
   const isMobile = windowWidth < 640;
   const isTablet = windowWidth >= 640 && windowWidth < 1024;
 
-  const responsiveWidth = isMobile
-    ? Math.min(220, windowWidth - 64)
+  const responsiveWidth = isSmallMobile
+    ? Math.min(190, windowWidth - 60)
+    : isMobile
+    ? Math.min(220, windowWidth - 80)
     : isTablet
     ? 310
     : cardWidth;
-  const responsiveHeight = isMobile ? 290 : isTablet ? 420 : cardHeight;
-  const responsiveGap = isMobile ? gap * 10 : isTablet ? gap * 20 : gap * 30;
+  const responsiveHeight = isSmallMobile ? 260 : isMobile ? 290 : isTablet ? 420 : cardHeight;
+  const responsiveGap = isSmallMobile ? 52 : isMobile ? 65 : isTablet ? gap * 20 : gap * 30;
 
   // Touch swipe handling for mobile devices
   const [touchStartX, setTouchStartX] = useState<number | null>(null);

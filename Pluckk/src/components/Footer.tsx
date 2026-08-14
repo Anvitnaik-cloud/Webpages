@@ -22,18 +22,18 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-zinc-950 border-t border-white/5 pt-20 pb-8 px-6">
+    <footer className="bg-zinc-950 border-t border-white/5 pt-12 sm:pt-20 pb-8 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 mb-12 sm:mb-16"
         >
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-2 mb-3 sm:mb-4">
               <span
                 className="text-2xl font-black bg-clip-text text-transparent tracking-tight"
                 style={{
@@ -47,11 +47,11 @@ export default function Footer() {
               Eat good. Do great. Premium cold-pressed juices from farm to
               bottle.
             </p>
-            <div className="flex items-center gap-3 mt-5">
+            <div className="flex items-center gap-3 mt-4 sm:mt-5">
               <a
                 href="#instagram"
                 onClick={(e) => e.preventDefault()}
-                className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-white/10 transition-all duration-300"
+                className="w-11 h-11 rounded-full bg-white/5 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-white/10 transition-all duration-300 min-h-[44px] min-w-[44px]"
                 aria-label="Instagram"
               >
                 <InstagramLogo weight="fill" className="w-4 h-4" />
@@ -59,7 +59,7 @@ export default function Footer() {
               <a
                 href="#x"
                 onClick={(e) => e.preventDefault()}
-                className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-white/10 transition-all duration-300"
+                className="w-11 h-11 rounded-full bg-white/5 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-white/10 transition-all duration-300 min-h-[44px] min-w-[44px]"
                 aria-label="X (Twitter)"
               >
                 <XLogo weight="fill" className="w-4 h-4" />
@@ -69,13 +69,13 @@ export default function Footer() {
 
           {/* Shop */}
           <div>
-            <h3 className="text-sm font-semibold text-white mb-4">Shop</h3>
-            <ul className="space-y-3">
+            <h3 className="text-sm font-semibold text-white mb-3 sm:mb-4">Shop</h3>
+            <ul className="space-y-2 sm:space-y-3">
               {shopLinks.map((link) => (
                 <li key={link.label}>
                   <button
                     onClick={() => setCurrentIndex(link.index)}
-                    className="text-sm text-zinc-500 hover:text-white transition-colors duration-200 text-left"
+                    className="text-sm text-zinc-500 hover:text-white transition-colors duration-200 text-left py-1 inline-block cursor-pointer min-h-[44px] flex items-center"
                   >
                     {link.label}
                   </button>
@@ -86,14 +86,14 @@ export default function Footer() {
 
           {/* Support */}
           <div>
-            <h3 className="text-sm font-semibold text-white mb-4">Support</h3>
-            <ul className="space-y-3">
+            <h3 className="text-sm font-semibold text-white mb-3 sm:mb-4">Support</h3>
+            <ul className="space-y-2 sm:space-y-3">
               {supportLinks.map((link) => (
                 <li key={link.label}>
                   <a
                     href={`#${link.label.toLowerCase()}`}
                     onClick={(e) => e.preventDefault()}
-                    className="text-sm text-zinc-500 hover:text-white transition-colors duration-200"
+                    className="text-sm text-zinc-500 hover:text-white transition-colors duration-200 py-1 inline-block min-h-[44px] flex items-center"
                   >
                     {link.label}
                   </a>
@@ -104,7 +104,7 @@ export default function Footer() {
 
           {/* Newsletter */}
           <div>
-            <h3 className="text-sm font-semibold text-white mb-4">
+            <h3 className="text-sm font-semibold text-white mb-3 sm:mb-4">
               Stay fresh
             </h3>
             <p className="text-sm text-zinc-500 mb-4 max-w-[30ch]">
@@ -117,12 +117,12 @@ export default function Footer() {
               <input
                 type="email"
                 placeholder="you@email.com"
-                className="flex-1 min-w-0 px-4 py-2.5 rounded-full bg-white/5 border border-white/10 text-sm text-white placeholder:text-zinc-600 focus:outline-none focus:border-white/20 transition-colors"
+                className="flex-1 min-w-0 px-4 py-2.5 min-h-[44px] rounded-full bg-white/5 border border-white/10 text-sm text-white placeholder:text-zinc-600 focus:outline-none focus:border-white/20 transition-colors"
                 aria-label="Email address"
               />
               <button
                 type="submit"
-                className="px-5 py-2.5 rounded-full text-sm font-semibold text-zinc-950 shrink-0 transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]"
+                className="px-5 py-2.5 min-h-[44px] rounded-full text-sm font-bold text-zinc-950 shrink-0 transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] cursor-pointer"
                 style={{
                   background: `linear-gradient(135deg, ${product.themeColor}, ${product.accentColor})`,
                 }}

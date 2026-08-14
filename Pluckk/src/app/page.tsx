@@ -82,14 +82,14 @@ function PageContent() {
             <ProductTextOverlays />
           </section>
 
-          {/* 200px full-width banner placed 100px after canvas */}
+          {/* Banner 1: 100% Cold-Pressed (Green banner right after canvas) */}
           <div
-            className="w-full mt-[100px] h-[200px] relative overflow-hidden"
+            className="w-full mt-[40px] sm:mt-[100px] min-h-[160px] sm:h-[200px] relative overflow-hidden flex items-center py-6 sm:py-0"
             style={{ backgroundColor: "#8FD3B6" }}
           >
-            <div className="max-w-7xl mx-auto h-full px-6 sm:px-12 flex items-center justify-between gap-6 sm:gap-10">
-              {/* Left Image - Full height of div, object-contain so text in image is fully visible */}
-              <div className="h-full shrink-0 flex items-center p-2">
+            <div className="max-w-6xl mx-auto w-full h-full px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-start gap-4 sm:gap-8 lg:gap-10">
+              {/* Left Image - Aligned parallel to gallery starting edge */}
+              <div className="h-28 sm:h-full shrink-0 flex items-center p-1 sm:p-2">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/images/banner-left.jpg"
@@ -98,15 +98,15 @@ function PageContent() {
                 />
               </div>
 
-              {/* Perfectly aligned Text content */}
-              <div className="flex-1 flex flex-col justify-center text-left text-emerald-950 py-4">
-                <p className="text-xs sm:text-sm font-bold uppercase tracking-widest text-emerald-900/80 mb-1">
+              {/* Left-aligned description content */}
+              <div className="flex-1 flex flex-col justify-center items-center sm:items-start text-center sm:text-left text-emerald-950 py-1 sm:py-4">
+                <p className="text-[11px] sm:text-sm font-bold uppercase tracking-widest text-emerald-900/80 mb-1">
                   Pure & Unprocessed
                 </p>
-                <h3 className="text-xl sm:text-3xl font-extrabold tracking-tight text-emerald-950 leading-tight">
+                <h3 className="text-lg sm:text-3xl font-extrabold tracking-tight text-emerald-950 leading-tight">
                   100% Cold-Pressed. Zero Added Sugar.
                 </h3>
-                <p className="text-xs sm:text-base font-medium text-emerald-900/90 mt-1 max-w-xl">
+                <p className="text-xs sm:text-base font-medium text-emerald-900/90 mt-1 max-w-xl sm:ml-0">
                   Sourced directly from organic orchards and bottled within 4 hours of harvest.
                 </p>
               </div>
@@ -123,22 +123,22 @@ function PageContent() {
           <FreshnessSection />
 
           {/* 3D Coverflow Showcase */}
-          <section className="relative py-12 sm:py-20 px-4 sm:px-6 overflow-hidden">
+          <section className="relative py-8 sm:py-20 px-3 sm:px-6 overflow-hidden">
             <div className="max-w-7xl mx-auto text-center mb-3">
               <p
-                className="text-xs sm:text-sm font-semibold uppercase tracking-wider mb-2 sm:mb-3"
+                className="text-[11px] sm:text-sm font-semibold uppercase tracking-wider mb-1.5 sm:mb-3"
                 style={{ color: product.themeColor }}
               >
                 3D Showcase
               </p>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900 mb-3 sm:mb-4">
+              <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900 mb-2 sm:mb-4">
                 Explore the Collection.
               </h2>
-              <p className="text-sm md:text-lg text-zinc-600 max-w-[45ch] mx-auto">
+              <p className="text-xs sm:text-base md:text-lg text-zinc-600 max-w-[45ch] mx-auto">
                 Click any bottle card to bring it to center stage.
               </p>
             </div>
-            <div className="min-h-[340px] sm:min-h-[550px] w-full flex items-center justify-center">
+            <div className="min-h-[300px] sm:min-h-[550px] w-full flex items-center justify-center">
               <CoverflowGallery />
             </div>
           </section>
@@ -149,18 +149,18 @@ function PageContent() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full min-h-[180px] sm:min-h-[200px] relative overflow-hidden flex items-center py-8 mt-4 mb-0 sm:mt-6 sm:mb-0"
+            className="w-full min-h-[160px] sm:min-h-[200px] relative overflow-hidden flex items-center py-6 sm:py-8 mt-4 mb-0 sm:mt-6 sm:mb-0"
             style={{ backgroundColor: "#F5A961" }}
           >
-            <div className="max-w-7xl mx-auto w-full px-6 sm:px-12 flex flex-col items-center justify-center text-center">
+            <div className="max-w-7xl mx-auto w-full px-4 sm:px-12 flex flex-col items-center justify-center text-center">
               <div className="flex flex-col items-center justify-center text-center text-orange-950 max-w-3xl mx-auto">
-                <p className="text-xs sm:text-sm font-bold uppercase tracking-widest text-orange-950/80 mb-1">
+                <p className="text-[11px] sm:text-sm font-bold uppercase tracking-widest text-orange-950/80 mb-1">
                   Refreshing Energy &bull; Pure Hydration
                 </p>
-                <h3 className="text-2xl sm:text-4xl font-black tracking-tight text-orange-950 leading-tight">
+                <h3 className="text-xl sm:text-4xl font-black tracking-tight text-orange-950 leading-tight">
                   Naturally Refreshing. Purely Real.
                 </h3>
-                <p className="text-xs sm:text-base font-semibold text-orange-950/90 mt-2 max-w-2xl mx-auto">
+                <p className="text-xs sm:text-base font-semibold text-orange-950/90 mt-1.5 sm:mt-2 max-w-2xl mx-auto">
                   Every bottle delivers an invigorating burst of raw vitamins and crisp fruit flavor crafted to revitalize your day.
                 </p>
               </div>

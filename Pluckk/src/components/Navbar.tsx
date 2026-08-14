@@ -39,9 +39,9 @@ export default function Navbar() {
             : "1px solid transparent",
         }}
       >
-        <div className="max-w-7xl mx-auto px-6 h-[72px] flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-[72px] flex items-center justify-between">
           {/* Logo / Wordmark */}
-          <Link href="/" className="flex items-center gap-2 group">
+          <Link href="/" className="flex items-center gap-2 group min-h-[44px] px-1">
             <span
               className="text-2xl font-black bg-clip-text text-transparent tracking-tight"
               style={{
@@ -54,7 +54,15 @@ export default function Navbar() {
 
           {/* CTA */}
           <button
-            className="relative px-6 py-2.5 rounded-full text-sm font-semibold text-zinc-950 transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]"
+            onClick={() => {
+              const buyElem = document.getElementById("buy-section");
+              if (buyElem) {
+                buyElem.scrollIntoView({ behavior: "smooth" });
+              } else {
+                window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+              }
+            }}
+            className="relative px-5 sm:px-6 py-2.5 min-h-[44px] flex items-center justify-center rounded-full text-xs sm:text-sm font-bold text-zinc-950 transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] cursor-pointer"
             style={{
               background: `linear-gradient(135deg, ${product.themeColor}, ${product.accentColor})`,
               boxShadow: scrolled

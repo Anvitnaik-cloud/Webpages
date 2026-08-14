@@ -64,10 +64,10 @@ const GALLERY_COLUMNS: GalleryItem[][] = [
 
 export function ImageGallery() {
 	return (
-		<div className="relative flex w-full flex-col items-center justify-center py-12 px-4 sm:px-6">
-			<div className="mx-auto grid w-full max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
+		<div className="relative flex w-full flex-col items-center justify-center py-6 sm:py-12 px-4 sm:px-6">
+			<div className="mx-auto grid w-full max-w-6xl gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
 				{GALLERY_COLUMNS.map((col, colIdx) => (
-					<div key={colIdx} className="grid gap-6">
+					<div key={colIdx} className="grid gap-4 sm:gap-6">
 						{col.map((item, index) => (
 							<AnimatedImage
 								key={`${colIdx}-${index}`}

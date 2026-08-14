@@ -92,34 +92,35 @@ function TextBlock({
   const display = useTransform(opacity, (v) => (v > 0.01 ? "block" : "none"));
 
   return (
-    /* Outer position wrapper maintains top-1/2 and -translate-y-1/2 safely */
+    /* Position wrapper: centered card at bottom on mobile, side-aligned on desktop */
     <motion.div
       style={{ display }}
-      className={`absolute top-1/2 -translate-y-1/2 max-w-sm sm:max-w-md w-full pointer-events-none ${
+      className={`absolute w-full pointer-events-none max-w-[calc(100vw-32px)] sm:max-w-md left-1/2 -translate-x-1/2 bottom-20 sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2 ${
         position === "left"
-          ? "left-4 sm:left-10 md:left-14 lg:left-20 text-left"
-          : "right-4 sm:right-10 md:right-14 lg:right-20 text-right"
+          ? "sm:left-10 md:left-14 lg:left-20 sm:right-auto sm:translate-x-0 sm:text-left"
+          : "sm:right-10 md:right-14 lg:right-20 sm:left-auto sm:translate-x-0 sm:text-right"
       }`}
     >
-      {/* Inner motion container handles opacity and smooth relative Y translation */}
+      {/* Inner motion container: glassmorphic card on mobile, transparent on desktop */}
       <motion.div
         style={{
           opacity,
           y: translateY,
         }}
-        className="flex flex-col select-none pointer-events-auto"
+        className="flex flex-col select-none pointer-events-auto text-center sm:text-inherit bg-white/70 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none p-4 sm:p-0 rounded-2xl sm:rounded-none border border-white/60 sm:border-none shadow-lg shadow-zinc-950/5 sm:shadow-none transition-all"
       >
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter leading-[1.08] mb-3 sm:mb-4 text-zinc-950 drop-shadow-xs">
+        <h2 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tighter leading-[1.1] sm:leading-[1.08] mb-2 sm:mb-4 text-zinc-950 drop-shadow-xs">
           {headline}
         </h2>
-        <p className="text-sm sm:text-base md:text-lg font-medium leading-relaxed text-zinc-800 max-w-[42ch]">
+        <p className="text-xs sm:text-base md:text-lg font-medium leading-relaxed text-zinc-800 max-w-[42ch] mx-auto sm:mx-0">
           {body}
         </p>
         <div
-          className="mt-3 sm:mt-4 w-12 sm:w-16 h-1 rounded-full shadow-xs"
+          className="mt-2.5 sm:mt-4 w-10 sm:w-16 h-1 rounded-full shadow-xs mx-auto sm:mx-0"
           style={{
             background: accentColor,
             marginLeft: position === "right" ? "auto" : undefined,
+            marginRight: position === "right" ? undefined : "auto",
           }}
         />
       </motion.div>
