@@ -22,6 +22,8 @@ export default function NewArrivals() {
             Explore the latest additions to our collection — engineered for performance, designed for style.
           </p>
         </div>
+      </div>
+      <div className="new-arrivals-gallery-fullwidth">
         <ExpandableGallery
           images={newArrivalImages}
           className="new-arrivals-gallery"

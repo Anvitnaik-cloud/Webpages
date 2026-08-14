@@ -22,6 +22,7 @@
     color: #111111;
     opacity: 0.85;
     white-space: nowrap;
+    pointer-events: none;
 }
 
 .banner-tagline2 {
@@ -36,6 +37,7 @@
     color: #ffffff;
     opacity: 0.85;
     white-space: nowrap;
+    pointer-events: none;
 }
 
 .banner img {

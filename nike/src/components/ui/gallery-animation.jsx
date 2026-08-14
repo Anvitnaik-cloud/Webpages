@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const ExpandableGallery = ({ images, className = '' }) => {
@@ -14,18 +14,35 @@ const ExpandableGallery = ({ images, className = '' }) => {
   };
 
   const goToNext = (e) => {
-    e.stopPropagation();
+    if (e && e.stopPropagation) e.stopPropagation();
     if (selectedIndex !== null) {
       setSelectedIndex((selectedIndex + 1) % images.length);
     }
   };
 
   const goToPrev = (e) => {
-    e.stopPropagation();
+    if (e && e.stopPropagation) e.stopPropagation();
     if (selectedIndex !== null) {
       setSelectedIndex((selectedIndex - 1 + images.length) % images.length);
     }
   };
+
+  useEffect(() => {
+    if (selectedIndex === null) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        closeImage();
+      } else if (e.key === 'ArrowRight') {
+        setSelectedIndex((prev) => (prev !== null ? (prev + 1) % images.length : null));
+      } else if (e.key === 'ArrowLeft') {
+        setSelectedIndex((prev) => (prev !== null ? (prev - 1 + images.length) % images.length : null));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedIndex, images.length]);
 
   const getFlexValue = (index) => {
     if (hoveredIndex === null) {

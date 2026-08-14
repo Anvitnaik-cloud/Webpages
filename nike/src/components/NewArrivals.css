@@ -38,7 +38,14 @@
   line-height: 1.6;
 }
 
-/* ─── Gallery Strip ─── */
+/* ─── Gallery Strip (Full-Width Screen Stretch) ─── */
+.new-arrivals-gallery-fullwidth {
+  width: 100%;
+  max-width: 100vw;
+  padding: 0 var(--gutter);
+  box-sizing: border-box;
+}
+
 .new-arrivals-gallery {
   width: 100%;
   max-width: 100%;
@@ -46,8 +53,8 @@
 
 .gallery-strip {
   display: flex;
-  gap: 6px;
-  height: 480px;
+  gap: 8px;
+  height: clamp(380px, 55vh, 580px);
   width: 100%;
 }
 
@@ -187,9 +194,13 @@
     max-width: 100%;
   }
 
+  .new-arrivals-gallery-fullwidth {
+    padding: 0 12px;
+  }
+
   .gallery-strip {
-    height: 320px;
-    gap: 4px;
+    height: clamp(300px, 45vh, 400px);
+    gap: 5px;
   }
 
   .gallery-modal-nav {
@@ -212,8 +223,12 @@
 }
 
 @media (max-width: 480px) {
+  .new-arrivals-gallery-fullwidth {
+    padding: 0 8px;
+  }
+
   .gallery-strip {
-    height: 240px;
-    gap: 3px;
+    height: 280px;
+    gap: 4px;
   }
 }

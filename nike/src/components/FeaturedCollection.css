@@ -174,14 +174,18 @@
         justify-content: space-between;
         gap: var(--space-sm);
         margin-bottom: var(--space-lg);
+        flex-wrap: wrap;
     }
     .featured-title {
-        font-size: clamp(20px, 5vw, 26px);
+        font-size: clamp(18px, 5vw, 26px);
+    }
+    .featured-viewall {
+        font-size: 11px;
     }
     .featured-grid {
         grid-template-columns: 1fr;
         gap: var(--space-md);
-        max-width: 420px;
+        max-width: 100%;
         margin: 0 auto;
         width: 100%;
     }

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './Navbar.css';
 
 const SearchIcon = () => (
@@ -22,24 +23,70 @@ const UserIcon = () => (
   </svg>
 );
 
+const MenuIcon = ({ isOpen }) => (
+  <svg className="navbar-icon mobile-menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    {isOpen ? (
+      <path d="M18 6L6 18M6 6l12 12" />
+    ) : (
+      <>
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </>
+    )}
+  </svg>
+);
+
 export default function Navbar() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setMobileMenuOpen(false);
+  };
+
   return (
     <nav className="navbar" id="navbar">
       <div className="navbar-inner">
-        <div className="navbar-logo">
+        <a href="#" className="navbar-logo" onClick={closeMenu}>
           AIR MAX <span className="logo-accent">CORE</span>
-        </div>
+        </a>
+        
         <div className="navbar-links">
           <a href="#" className="active">Shop</a>
-          <a href="#featured">New Arrivals</a>
-          <a href="#science">Launch</a>
+          <a href="#new-arrivals">New Arrivals</a>
+          <a href="#featured">Featured</a>
+          <a href="#science">Science</a>
           <a href="#story">Technology</a>
-          <a href="#join">Story</a>
+          <a href="#join">Join Squad</a>
         </div>
+
         <div className="navbar-icons">
           <SearchIcon />
           <CartIcon />
           <UserIcon />
+          <button 
+            className="mobile-menu-toggle" 
+            onClick={toggleMobileMenu} 
+            aria-label="Toggle Navigation Menu"
+          >
+            <MenuIcon isOpen={mobileMenuOpen} />
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Navigation Drawer */}
+      <div className={`navbar-mobile-drawer ${mobileMenuOpen ? 'open' : ''}`}>
+        <div className="navbar-mobile-links">
+          <a href="#" className="active" onClick={closeMenu}>Shop</a>
+          <a href="#new-arrivals" onClick={closeMenu}>New Arrivals</a>
+          <a href="#featured" onClick={closeMenu}>Featured</a>
+          <a href="#science" onClick={closeMenu}>Science</a>
+          <a href="#story" onClick={closeMenu}>Technology</a>
+          <a href="#join" onClick={closeMenu}>Join Squad</a>
         </div>
       </div>
     </nav>
